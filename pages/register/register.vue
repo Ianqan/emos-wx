@@ -18,11 +18,27 @@
 	export default {
 		data() {
 			return {
-				
+				registerCode: ""
 			}
 		},
 		methods: {
 			register: function() {
+				let that = this;
+				if (that.registerCode == null || that.registerCode.length == 0) {
+					uni.showToast({
+						icon: "none",
+						title: "邀请码不能为空"
+					});
+					return;
+				}
+				else if (/^[0-9]{6}$/.test(that.registerCode) == false) {
+					uni.showToast({
+						icon: "none",
+						title: "邀请码必须是6位数字"
+					});
+					return;
+				}
+
 				uni.login({
 					provider: 'weixin',
 					success: function(resp) {
@@ -33,8 +49,19 @@
 							success: function(resp) {
 								let nickName = resp.userInfo.nickName
 								let avartarUrl = resp.userInfo.avatarUrl
-								console.log(nickName)
-								console.log(avartarUrl)
+								// console.log(nickName)
+								// console.log(avartarUrl)
+								let data = {
+									code: code,
+									nickname: nickName,
+									photo: avartarUrl,
+									registerCode: that.registerCode
+								};
+								that.ajax(that.url.register, 'POST', data, function(resp) {
+									let permission = resp.data.permission;
+									uni.setStorageSync('permission', permission);
+									console.log(permission);
+								});
 							}
 						})
 					}

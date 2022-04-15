@@ -149,12 +149,28 @@ __webpack_require__.r(__webpack_exports__);
 var _default =
 {
   data: function data() {
-    return {};
-
+    return {
+      registerCode: "" };
 
   },
   methods: {
     register: function register() {
+      var that = this;
+      if (that.registerCode == null || that.registerCode.length == 0) {
+        uni.showToast({
+          icon: "none",
+          title: "邀请码不能为空" });
+
+        return;
+      } else
+      if (/^[0-9]{6}$/.test(that.registerCode) == false) {
+        uni.showToast({
+          icon: "none",
+          title: "邀请码必须是6位数字" });
+
+        return;
+      }
+
       uni.login({
         provider: 'weixin',
         success: function success(resp) {
@@ -165,8 +181,19 @@ var _default =
             success: function success(resp) {
               var nickName = resp.userInfo.nickName;
               var avartarUrl = resp.userInfo.avatarUrl;
-              console.log(nickName);
-              console.log(avartarUrl);
+              // console.log(nickName)
+              // console.log(avartarUrl)
+              var data = {
+                code: code,
+                nickname: nickName,
+                photo: avartarUrl,
+                registerCode: that.registerCode };
+
+              that.ajax(that.url.register, 'POST', data, function (resp) {
+                var permission = resp.data.permission;
+                uni.setStorageSync('permission', permission);
+                console.log(permission);
+              });
             } });
 
         } });
