@@ -8641,7 +8641,7 @@ function resolveLocaleChain(locale) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/@dcloudio/webpack-uni-pages-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/ian/Desktop/Workspace_self/springboot_wechat/emos-wx/manifest.json'\n    at Object.openSync (fs.js:462:3)\n    at Object.readFileSync (fs.js:364:35)\n    at Object.<anonymous> (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-pages-loader/lib/index-new.js:66:8)\n    at Object.<anonymous> (/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-pages-loader/lib/index.js:57:35)");
+
 
 /***/ }),
 /* 6 */,
