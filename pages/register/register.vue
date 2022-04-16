@@ -42,7 +42,7 @@
 				uni.login({
 					provider: 'weixin',
 					success: function(resp) {
-						// console.log(resp.code);
+						console.log(resp.code);
 						let code = resp.code
 						uni.getUserInfo({
 							provider: 'weixin',

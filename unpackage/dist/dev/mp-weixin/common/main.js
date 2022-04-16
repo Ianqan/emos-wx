@@ -32,7 +32,8 @@ createApp(app).$mount();
 var baseUrl = "http://192.168.0.115:8080/emos-wx-api";
 
 _vue.default.prototype.url = {
-  register: baseUrl + "/user/register" };
+  register: baseUrl + "/user/register",
+  login: baseUrl + "/user/login" };
 
 
 _vue.default.prototype.ajax = function (url, method, data, fun) {
