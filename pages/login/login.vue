@@ -35,6 +35,9 @@
 							uni.setStorageSync('permission', permission);
 						})
 						console.log("success")
+						uni.switchTab({
+							url: '../index/index'
+						});
 					},
 					fail: function(e) {
 						console.log(e)

@@ -173,6 +173,9 @@ var _default =
             uni.setStorageSync('permission', permission);
           });
           console.log("success");
+          uni.switchTab({
+            url: '../index/index' });
+
         },
         fail: function fail(e) {
           console.log(e);
