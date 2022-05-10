@@ -168,6 +168,7 @@ var _default =
         provider: 'weixin',
         success: function success(resp) {
           var code = resp.code;
+          console.log(code);
           that.ajax(that.url.login, 'POST', { 'code': code }, function (resp) {
             var permission = resp.data.permission;
             uni.setStorageSync('permission', permission);

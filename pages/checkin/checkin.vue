@@ -14,6 +14,8 @@
 </template>
 
 <script>
+	var QQMapWX = require('../../lib/qqmap-wx-jssdk.min.js');
+	var qqmapsdk;
 	export default {
 		data() {
 			return {
@@ -23,6 +25,11 @@
 				showCamera: true,
 				showImage: false
 			}
+		},
+		onLoad: function() {
+			qqmapsdk = new QQMapWX({
+				key: "7Q3BZ-U6GWD-XIQ4Q-HGWJA-OLYXO-DGBHK"
+			})
 		},
 		methods: {
 			clickBtn: function() {
@@ -41,7 +48,37 @@
 					})
 				}
 				else {
+					uni.showLoading({
+						title: "签到中请稍候"
+					})
+					setTimeout(function() {
+						uni.hideLoading()
+					}, 30000)
 					
+					uni.getLocation({
+						type: "wgs84",
+						success: function(resp) {
+							let latitude = resp.latitude
+							let longitude = resp.longitude
+							console.log("latitude is ", latitude)
+							console.log("longitude is ", longitude)
+							qqmapsdk.reverseGeocoder({
+								location: {
+									latitude: latitude,
+									longitude: longitude
+								},
+								success: function(resp) {
+									console.log(resp.result)
+									let address = resp.result.address
+									let addressComponent = resp.result.address_component
+									let nation = addressComponent.nation;
+									let province = addressComponent.province;
+									let city = addressComponent.city;
+									let district = addressComponent.district;
+								}
+							})
+						}
+					})
 				}
 			},
 			afresh: function() {
